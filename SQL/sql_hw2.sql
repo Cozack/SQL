@@ -13,7 +13,7 @@ SELECT * FROM application ORDER BY idApplication DESC LIMIT 5
 
 
 --5. +Вивести усіх клієнтів, чиє прізвище закінчується на OV чи OVA.
-SELECT * FROM client WHERE LastName LIKE '%OV' OR '%OVA'
+SELECT * FROM client WHERE LastName LIKE '%OV' OR LastName LIKE '%OVA'
 
 --6. +Вивести клієнтів банку, які обслуговуються київськими відділеннями.
 
@@ -94,6 +94,8 @@ SELECT client.firstname,
 avg(application.sum) max_avg_sum
  FROM client
 JOIN application ON client.idClient = application.Client_idClient
+GROUP BY client.FirstName
+ORDER BY max_avg_sum DESC LIMIT 1;
 
 
 --15. Вивести відділення, яке видало в кредити найбільше грошей
