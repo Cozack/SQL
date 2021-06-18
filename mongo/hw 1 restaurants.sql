@@ -32,24 +32,32 @@ db.getCollection('rest').find({'grades.score':{$gt:80,$lt:100}})
 --10. Write a MongoDB query to find the restaurants which locate in latitude value less than -95.754168
 db.getCollection('rest').find({'address.coord.0':{$lt:-95.754168}})
 
-11. Write a MongoDB query to find the restaurants that do not prepare any cuisine of 'American' and their grade score more than 70 and latitude less than -65.754168.
+--11. Write a MongoDB query to find the restaurants that do not prepare any cuisine of 'American' and their grade score more than 70 and latitude less than -65.754168.
+db.getCollection('rest').find({cuisine:{ $ne: 'American ' }
+,$and: [{'grades.score':{$gt:70}},
+{'address.coord.0':{$lt:-65.754168}}]})
 
+--12. Write a MongoDB query to find the restaurants which do not prepare any cuisine of 'American' and achieved a score more than 70 and located in the longitude less than -65.754168.
+--    Note : Do this query without using $and operator.
+db.getCollection('rest').find({cuisine:{ $ne: 'American ' },
+'grades.score':{$gt:70},'address.coord.0':{$lt:-65.754168}})
 
-12. Write a MongoDB query to find the restaurants which do not prepare any cuisine of 'American' and achieved a score more than 70 and located in the longitude less than -65.754168.
-    Note : Do this query without using $and operator.
+--13. Write a MongoDB query to find the restaurants which do not prepare any cuisine of 'American ' and achieved a grade point 'A' not belongs to the borough Brooklyn. The document must be displayed according to the cuisine in descending order.
+db.getCollection('rest').find({cuisine:{ $ne: 'American ' },
+'grades.grade':{$eq:'A'},borough:{$ne:'Brooklyn'}})
+.sort({cuisine:-1})
 
+--14. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Wil' as first three letters for its name.
+db.getCollection('rest').find({name:/^Wil/i},
+{_id:false,restaurant_id:true, name:true, borough:true,cuisine:true})
 
-13. Write a MongoDB query to find the restaurants which do not prepare any cuisine of 'American ' and achieved a grade point 'A' not belongs to the borough Brooklyn. The document must be displayed according to the cuisine in descending order.
+--15. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'ces' as last three letters for its name.
+db.getCollection('rest').find({name:/ces$/i},
+{_id:false,restaurant_id:true, name:true, borough:true,cuisine:true})
 
-
-14. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Wil' as first three letters for its name.
-
-
-15. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'ces' as last three letters for its name.
-
-
-16. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Reg' as three letters somewhere in its name.
-
+--16. Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Reg' as three letters somewhere in its name.
+db.getCollection('rest').find({name:/.*Reg.*/},
+{_id:false,restaurant_id:true, name:true, borough:true,cuisine:true})
 
 17. Write a MongoDB query to find the restaurants which belong to the borough Bronx and prepared either American or Chinese dish.
 
