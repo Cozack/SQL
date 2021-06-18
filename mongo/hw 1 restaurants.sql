@@ -88,14 +88,16 @@ name: /^Wil/i},
     {restaurant_id:true, name:true,borough:true,cuisine:true})
 
 --22. Write a MongoDB query to find the restaurant Id, name, and grades for those restaurants which achieved a grade of "A" and scored 11 on an ISODate "2014-08-11T00:00:00Z" among many of survey dates..
-db.getCollection('rest').find({ 'grades.grade':'A',
+db.getCollection('rest').find({
     'grades.date':ISODate('2014-08-11T00:00:00Z'),
+    'grades.grade':'A',
     'grades.score':11},
     {restaurant_id:1, name:1,grades:1})
 
 --23. Write a MongoDB query to find the restaurant Id, name and grades for those restaurants where the 2nd element of grades array contains a grade of "A" and score 9 on an ISODate "2014-08-11T00:00:00Z".
-db.getCollection('rest').find({ 'grades.1.grade':'A',
+db.getCollection('rest').find({
     'grades.date':ISODate('2014-08-11T00:00:00Z'),
+     'grades.1.grade':'A',
     'grades.score':9},
     {restaurant_id:1, name:1,grades:1})
 
